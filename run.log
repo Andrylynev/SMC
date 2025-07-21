@@ -1,0 +1,96 @@
+Traceback (most recent call last):
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f48ac71df10>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.bybit.com', port=443): Max retries exceeded with url: /v5/market/instruments-info?category=spot (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f48ac71df10>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/exchange.py", line 556, in fetch
+    response = self.session.request(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.bybit.com', port=443): Max retries exceeded with url: /v5/market/instruments-info?category=spot (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f48ac71df10>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/SMC/smc_bot.py", line 323, in <module>
+    asyncio.run(analyze_all_pairs())
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/SMC/smc_bot.py", line 298, in analyze_all_pairs
+    markets = exchange.fetch_markets()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/bybit.py", line 1708, in fetch_markets
+    promisesUnresolved.append(self.fetch_spot_markets(params))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/bybit.py", line 1741, in fetch_spot_markets
+    response = self.publicGetV5MarketInstrumentsInfo(self.extend(request, params))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/exchange.py", line 4531, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/exchange.py", line 4525, in fetch2
+    raise e
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/exchange.py", line 4516, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.pyenv/versions/3.11.12/lib/python3.11/site-packages/ccxt/base/exchange.py", line 609, in fetch
+    raise NetworkError(details) from e
+ccxt.base.errors.NetworkError: bybit GET https://api.bybit.com/v5/market/instruments-info?category=spot
